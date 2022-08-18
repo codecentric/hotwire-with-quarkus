@@ -1,20 +1,22 @@
 {#include index.html}
     {#body}
-        <div id="todolist">
-            <h1>TODO List</h1>
-            <turbo-frame id="todolist" src="/todos">
-                <img src="images/spinner.gif" alt="Loading">
-            </turbo-frame>
-        </div>
+        <!-- Putting a div tag around this section (with turbo-frame) causes the form with data-turbo-frame to fail -->
+        <h1>TODO List</h1>
+        <turbo-frame id="todolist" src="/todos">
+            <img src="images/spinner.gif" alt="Loading">
+        </turbo-frame>
 
-        <div id="todocreation">
-            <h1>Create TODO</h1>
-            <form action="/todos" method="POST" enctype="multipart/form-data">
-                <label for="name">TODO:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <input type="submit" value="Create">
-            </form>
-        </div>
+        <h1>Create TODO</h1>
+        <form action="/todos" method="POST" enctype="multipart/form-data" data-turbo-frame="todolist">
+            <label for="name">TODO:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <input type="submit" value="Create">
+        </form>
+
+        <h1>Remove Todo</h1>
+        <form action="/todos/remove" method="POST" data-turbo-frame="todolist">
+            <button type="submit">Remove Todo</button>
+        </form>
     {/body}
 {/include}

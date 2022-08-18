@@ -13,8 +13,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +25,12 @@ public class TodoResource {
     private static final Logger LOG = Logger.getLogger(TodoResource.class);
     private final List<Todo> todoList = new ArrayList<>();
 
+    public TodoResource() {
+        this.todoList.add(new Todo("Todo"));
+        this.todoList.add(new Todo("Another Todo"));
+        this.todoList.add(new Todo("Yet another Todo"));
+    }
+
     @CheckedTemplate
     public static class Templates {
         public static native TemplateInstance todos(final List<Todo> todoList);
@@ -36,16 +40,25 @@ public class TodoResource {
     @GET
     public TemplateInstance getTodoList() throws InterruptedException {
         LOG.info("Sleeping to simulate long running process");
-        Thread.sleep(3000);
+        Thread.sleep(1500);
         return Templates.todos(this.todoList);
     }
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response addTodo(@MultipartForm final TodoCreationForm todoCreationForm) {
+    public TemplateInstance addTodo(@MultipartForm final TodoCreationForm todoCreationForm) {
         final Todo created = todoCreationForm.fromForm();
         this.todoList.add(created);
-        return Response.seeOther(URI.create("/")).build();
+        return Templates.todos(this.todoList);
+    }
+
+    @POST
+    @Path("/remove")
+    public TemplateInstance removeOldest() {
+        if (!this.todoList.isEmpty()) {
+            this.todoList.remove(0);
+        }
+        return Templates.todos(this.todoList);
     }
 
     @GET
