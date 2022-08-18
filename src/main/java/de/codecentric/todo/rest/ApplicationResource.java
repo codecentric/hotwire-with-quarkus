@@ -1,4 +1,4 @@
-package de.codecentric;
+package de.codecentric.todo.rest;
 
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;

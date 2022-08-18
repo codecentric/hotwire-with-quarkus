@@ -1,5 +1,6 @@
-package de.codecentric.todo;
+package de.codecentric.todo.core.impl.business;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Todo {
@@ -28,5 +29,21 @@ public class Todo {
 
     public void markComplete() {
         this.completed = true;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Todo todo = (Todo) o;
+
+        return Objects.equals(id, todo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }

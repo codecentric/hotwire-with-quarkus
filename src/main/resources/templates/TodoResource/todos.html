@@ -5,6 +5,7 @@
                 <th>Title</th>
                 <th>Completed</th>
                 <th>Mark as done</th>
+                <th>Remove</th>
             </tr>
         </thead>
 
@@ -20,6 +21,11 @@
                     <td>
                         <form action="/todos/{todo.id}" method="POST" enctype="multipart/form-data">
                             <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/todos/remove/{todo.id}" method="POST" enctype="multipart/form-data">
+                            <input type="submit" value="Remove">
                         </form>
                     </td>
                 </tr>
