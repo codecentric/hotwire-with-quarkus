@@ -1,46 +1,29 @@
-{#include index.html}
-    {#title}My TODOs{/title}
-    {#body}
-        <div id="todotable">
-            <h1>TODO List</h1>
+<turbo-frame id="todolist">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Completed</th>
+                <th>Mark as done</th>
+            </tr>
+        </thead>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Completed</th>
-                        <th>Mark as done</th>
-                    </tr>
-                </thead>
-
-                {#if todoList.size == 0}
-                    <tr>
-                        <td>No TODOs. Yay!</td>
-                    </tr>
-                {#else}
-                    {#for todo in todoList}
-                        <tr>
-                            <td><a href="/todos/{todo.id}">{todo.name}</a></td>
-                            <td>{#if todo.completed} Done {#else} Open {/if}</td>
-                            <td>
-                                <form action="/todos/{todo.id}" method="POST" enctype="multipart/form-data">
-                                    <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
-                                </form>
-                            </td>
-                        </tr>
-                    {/for}
-                {/if}
-            </table>
-        </div>
-
-        <div id="todocreation">
-            <h1>Create TODO</h1>
-            <form action="/todos" method="POST" enctype="multipart/form-data">
-                <label for="name">TODO:</label>
-                <input type="text" id="name" name="name" required>
-                <br>
-                <input type="submit" value="Create">
-            </form>
-        </div>
-    {/body}
-{/include}
+        {#if todoList.size == 0}
+            <tr>
+                <td>No TODOs. Yay!</td>
+            </tr>
+        {#else}
+            {#for todo in todoList}
+                <tr>
+                    <td><a href="/todos/{todo.id}">{todo.name}</a></td>
+                    <td>{#if todo.completed} Done {#else} Open {/if}</td>
+                    <td>
+                        <form action="/todos/{todo.id}" method="POST" enctype="multipart/form-data">
+                            <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
+                        </form>
+                    </td>
+                </tr>
+            {/for}
+        {/if}
+    </table>
+</turbo-frame>

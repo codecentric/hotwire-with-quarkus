@@ -2,9 +2,8 @@ package de.codecentric.todo;
 
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
+import org.jboss.logging.Logger;
 import org.jboss.resteasy.reactive.MultipartForm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -25,7 +24,7 @@ import java.util.UUID;
 @Produces(MediaType.TEXT_HTML)
 public class TodoResource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(TodoResource.class);
+    private static final Logger LOG = Logger.getLogger(TodoResource.class);
     private final List<Todo> todoList = new ArrayList<>();
 
     @CheckedTemplate
@@ -36,6 +35,7 @@ public class TodoResource {
 
     @GET
     public TemplateInstance getTodoList() throws InterruptedException {
+        LOG.info("Sleeping to simulate long running process");
         Thread.sleep(3000);
         return Templates.todos(this.todoList);
     }
@@ -45,8 +45,7 @@ public class TodoResource {
     public Response addTodo(@MultipartForm final TodoCreationForm todoCreationForm) {
         final Todo created = todoCreationForm.fromForm();
         this.todoList.add(created);
-        LOG.info("Todo List elements {}", this.todoList);
-        return Response.seeOther(URI.create("/todos/")).build();
+        return Response.seeOther(URI.create("/")).build();
     }
 
     @GET
@@ -67,7 +66,7 @@ public class TodoResource {
         Optional<Todo> todoWithId = findById(todoId);
         if (todoWithId.isPresent()) {
             todoWithId.get().markComplete();
-            return Response.seeOther(URI.create("/todos/")).build();
+            return Response.seeOther(URI.create("/")).build();
         } else {
             throw new NotFoundException("Todo with id " + todoId.toString() + " is not existing");
         }

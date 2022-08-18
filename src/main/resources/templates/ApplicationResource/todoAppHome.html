@@ -1,0 +1,20 @@
+{#include index.html}
+    {#body}
+        <div id="todolist">
+            <h1>TODO List</h1>
+            <turbo-frame id="todolist" src="/todos">
+                <img src="images/spinner.gif" alt="Loading">
+            </turbo-frame>
+        </div>
+
+        <div id="todocreation">
+            <h1>Create TODO</h1>
+            <form action="/todos" method="POST" enctype="multipart/form-data">
+                <label for="name">TODO:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <input type="submit" value="Create">
+            </form>
+        </div>
+    {/body}
+{/include}
