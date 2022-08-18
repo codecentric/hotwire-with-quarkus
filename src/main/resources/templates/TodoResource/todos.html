@@ -2,33 +2,35 @@
     {#title}My TODOs{/title}
     {#body}
         <div id="todotable">
-        <h1>TODO List</h1>
+            <h1>TODO List</h1>
 
-        <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Completed</th>
-        </tr>
-        </thead>
-
-        {#if todoList.size == 0}
-            <tr>
-                <td>No TODOs. Yay!</td>
-            </tr>
-            {#else}
-
-                {#for todo in todoList}
+            <table>
+                <thead>
                     <tr>
-                    <td>{todo.id}</td>
-                    <td>{todo.name}</td>
-                    <td>{#if todo.completed} Done {#else} Open {/if}</td>
+                        <th>Title</th>
+                        <th>Completed</th>
+                        <th>Mark as done</th>
                     </tr>
-                {/for}
-        {/if}
+                </thead>
 
-        </table>
+                {#if todoList.size == 0}
+                    <tr>
+                        <td>No TODOs. Yay!</td>
+                    </tr>
+                {#else}
+                    {#for todo in todoList}
+                        <tr>
+                            <td><a href="/todos/{todo.id}">{todo.name}</a></td>
+                            <td>{#if todo.completed} Done {#else} Open {/if}</td>
+                            <td>
+                                <form action="/todos/{todo.id}" method="POST" enctype="multipart/form-data">
+                                    <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
+                                </form>
+                            </td>
+                        </tr>
+                    {/for}
+                {/if}
+            </table>
         </div>
 
         <div id="todocreation">
