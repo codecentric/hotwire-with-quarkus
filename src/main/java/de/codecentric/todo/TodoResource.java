@@ -62,11 +62,11 @@ public class TodoResource {
     @POST
     @Path("/{todoId}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response markTodoAsDone(@PathParam("todoId") final UUID todoId) {
+    public TemplateInstance markTodoAsDone(@PathParam("todoId") final UUID todoId) {
         Optional<Todo> todoWithId = findById(todoId);
         if (todoWithId.isPresent()) {
             todoWithId.get().markComplete();
-            return Response.seeOther(URI.create("/")).build();
+            return Templates.todos(this.todoList);
         } else {
             throw new NotFoundException("Todo with id " + todoId.toString() + " is not existing");
         }
