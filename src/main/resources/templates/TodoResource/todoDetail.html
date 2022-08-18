@@ -1,19 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO Details {todo.id}</title>
-</head>
-<body>
-<div id="tododetail">
-    <h1>{todo.name}</h1>
+{#include index.html}
+    {#title}TODO Details {todo.id}{/title}
+    {#body}
+        <div id="tododetail">
+            <h1>{todo.name}</h1>
 
-    <ul>
-        <li>Id: {todo.id}</li>
-        <li>Completed:{#if todo.completed} Yes {#else} No {/if}</li>
-    </ul>
+            <ul>
+            <li>Id: {todo.id}</li>
+            <li>Completed:{#if todo.completed} Yes {#else} No {/if}</li>
+            </ul>
 
-</div>
-</body>
-</html>
+        </div>
+    {/body}
+{/include}

@@ -1,39 +1,34 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>TODOs</title>
-    </head>
-    <body>
+{#include index.html}
+    {#title}My TODOs{/title}
+    {#body}
         <div id="todotable">
-            <h1>TODO List</h1>
+        <h1>TODO List</h1>
 
-            <table>
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Title</th>
-                    <th>Completed</th>
-                </tr>
-                </thead>
+        <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Completed</th>
+        </tr>
+        </thead>
 
-                {#if todoList.size == 0}
-                <tr>
-                    <td>No TODOs. Yay!</td>
-                </tr>
-                {#else}
+        {#if todoList.size == 0}
+            <tr>
+                <td>No TODOs. Yay!</td>
+            </tr>
+            {#else}
 
                 {#for todo in todoList}
-                <tr>
+                    <tr>
                     <td>{todo.id}</td>
                     <td>{todo.name}</td>
                     <td>{#if todo.completed} Done {#else} Open {/if}</td>
-                </tr>
+                    </tr>
                 {/for}
-                {/if}
+        {/if}
 
-            </table>
+        </table>
         </div>
 
         <div id="todocreation">
@@ -45,5 +40,5 @@
                 <input type="submit" value="Create">
             </form>
         </div>
-    </body>
-</html>
+    {/body}
+{/include}
