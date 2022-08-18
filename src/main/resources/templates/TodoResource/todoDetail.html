@@ -9,6 +9,11 @@
                 <li>Completed:{#if todo.completed} Yes {#else} No {/if}</li>
             </ul>
 
+            <br>
+
+            <form action="/todos">
+                <input type="submit" value="Back to my Todos">
+            </form>
         </div>
     {/body}
 {/include}
