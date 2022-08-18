@@ -37,7 +37,8 @@ public class TodoResource {
     }
 
     @GET
-    public TemplateInstance getTodoList() {
+    public TemplateInstance getTodoList() throws InterruptedException {
+        Thread.sleep(3000);
         return Templates.todos(this.todoList);
     }
 
