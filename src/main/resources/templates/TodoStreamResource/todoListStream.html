@@ -1,0 +1,35 @@
+<turbo-frame id="todolist">
+    <table id="todolistTable">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Completed</th>
+            <th>Mark as done</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+
+        {#if todoList.size == 0}
+            <tr>
+                <td>No TODOs. Yay!</td>
+            </tr>
+            {#else}
+                {#for todo in todoList}
+                    <tr id="{todo.id}-row">
+                        <td><a href="/todos/{todo.id}" data-turbo-frame="_top">{todo.name}</a></td>
+                        <td>{#if todo.completed} Done {#else} Open {/if}</td>
+                        <td>
+                            <form action="/todos/stream/{todo.id}" method="POST" enctype="multipart/form-data">
+                                <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/todos/stream/remove/{todo.id}" method="POST" enctype="multipart/form-data">
+                                <input type="submit" value="Remove">
+                            </form>
+                        </td>
+                    </tr>
+                {/for}
+        {/if}
+    </table>
+</turbo-frame>

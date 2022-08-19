@@ -1,0 +1,18 @@
+<turbo-stream action="append" target="todolistTable">
+    <template>
+        <tr id="{todo.id}-row">
+            <td><a href="/todos/{todo.id}" data-turbo-frame="_top">{todo.name}</a></td>
+            <td>Open</td>
+            <td>
+                <form action="/todos/stream/{todo.id}" method="POST" enctype="multipart/form-data">
+                    <input type="submit" value="Done">
+                </form>
+            </td>
+            <td>
+                <form action="/todos/stream/remove/{todo.id}" method="POST" enctype="multipart/form-data">
+                    <input type="submit" value="Remove">
+                </form>
+            </td>
+        </tr>
+    </template>
+</turbo-stream>

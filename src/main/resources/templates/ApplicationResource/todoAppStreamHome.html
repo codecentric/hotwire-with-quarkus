@@ -1,0 +1,17 @@
+{#include index.html}
+    {#body}
+        <!-- Putting a div tag around this section (with turbo-frame) causes the form with data-turbo-frame to fail -->
+        <h1>TODO List</h1>
+        <turbo-frame id="todolist" src="/todos/stream">
+            <img src="images/spinner.gif" alt="Loading">
+        </turbo-frame>
+
+        <h1>Create TODO</h1>
+        <form action="/todos/stream" method="POST" enctype="multipart/form-data" data-turbo-frame="todolist">
+            <label for="name">TODO:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <input type="submit" value="Create">
+        </form>
+    {/body}
+{/include}
