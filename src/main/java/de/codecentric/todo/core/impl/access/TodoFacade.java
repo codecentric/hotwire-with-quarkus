@@ -22,16 +22,25 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
 
     @Override
     public UUID addTodo(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Todo name must not be null or empty");
+        }
         return this.todoService.addTodo(name);
     }
 
     @Override
     public void markCompleted(UUID todoId) {
+        if (todoId == null) {
+            throw new IllegalArgumentException("Todo Id must not be null");
+        }
         this.todoService.markCompleted(todoId);
     }
 
     @Override
     public TodoDTO findById(UUID todoId) {
+        if (todoId == null) {
+            throw new IllegalArgumentException("Todo Id must not be null");
+        }
         return mapToDTO(this.todoService.findById(todoId));
     }
 
@@ -42,6 +51,9 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
 
     @Override
     public void removeTodo(UUID todoId) {
+        if (todoId == null) {
+            throw new IllegalArgumentException("Todo Id must not be null");
+        }
         this.todoService.removeTodo(todoId);
     }
 
