@@ -11,8 +11,12 @@ import java.util.UUID;
 @ApplicationScoped
 public class TodoService {
 
+    private final TodoRepository repository;
+
     @Inject
-    TodoRepository repository;
+    TodoService(TodoRepository repository) {
+        this.repository = repository;
+    }
 
     public UUID addTodo(String name) {
         return this.repository.add(new Todo(name));

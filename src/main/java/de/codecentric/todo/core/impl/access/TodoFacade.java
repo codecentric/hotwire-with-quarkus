@@ -17,8 +17,12 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, QueryTodoUseCase, RemoveTodoUseCase {
 
+    private final TodoService todoService;
+
     @Inject
-    TodoService todoService;
+    TodoFacade(TodoService todoService) {
+        this.todoService = todoService;
+    }
 
     @Override
     public UUID addTodo(String name) {
