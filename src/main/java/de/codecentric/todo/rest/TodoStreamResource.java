@@ -45,8 +45,7 @@ public class TodoStreamResource {
     public static class Templates {
         public static native TemplateInstance todoListStream(final List<TodoDTO> todoList);
         public static native TemplateInstance todoListMarkTodoCompleted(final TodoDTO todo);
-        public static native TemplateInstance todoListRemoveTodo(final UUID todoId);
-        public static native TemplateInstance todoListNoTodoLeft(final UUID todoId);
+        public static native TemplateInstance todoListRemoveTodo(final UUID todoId, final boolean noTodoLeft);
         public static native TemplateInstance todoListAddTodo(final TodoDTO todo);
     }
 
@@ -70,11 +69,7 @@ public class TodoStreamResource {
     @Produces(ApplicationResource.TURBO_STREAM_RESPONSE_TYPE)
     public TemplateInstance removeViaStream(@PathParam("todoId") final UUID todoId) {
         this.removeTodoUseCase.removeTodo(todoId);
-        if (this.queryTodoUseCase.findAll().isEmpty()) {
-            return Templates.todoListNoTodoLeft(todoId);
-        } else {
-            return Templates.todoListRemoveTodo(todoId);
-        }
+        return Templates.todoListRemoveTodo(todoId, this.queryTodoUseCase.findAll().isEmpty());
     }
 
     @POST
