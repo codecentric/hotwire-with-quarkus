@@ -1,5 +1,5 @@
 {#include index}
-    {#title}TODO App with Turbo Frames & Streams{/title}
+    {#title}TODO App with Turbo Frames & Streams & Server-Sent-Events{/title}
 
     {#additionalScript}
         <script type="text/javascript">
@@ -14,7 +14,7 @@
     {#body}
         <h1>TODO List</h1>
         <turbo-frame id="todolist" src="/todos/sse">
-            <img src="images/spinner.gif" alt="Loading">
+            <div class="loader"></div>
         </turbo-frame>
 
         <h1>Create TODO</h1>
