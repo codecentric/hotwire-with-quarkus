@@ -1,0 +1,28 @@
+{#include index}
+    {#title}TODO App with Turbo Frames & Streams{/title}
+
+    {#additionalScript}
+        <script type="text/javascript">
+            if (window["EventSource"] && window["Turbo"]) {
+                Turbo.connectStreamSource(new EventSource("/todos/sse/connect"));
+            } else {
+                console.warn("Turbo Streams over SSE not available");
+            }
+        </script>
+    {/additionalScript}
+
+    {#body}
+        <h1>TODO List</h1>
+        <turbo-frame id="todolist" src="/todos/sse">
+            <img src="images/spinner.gif" alt="Loading">
+        </turbo-frame>
+
+        <h1>Create TODO</h1>
+        <form action="/todos/sse" method="POST" enctype="multipart/form-data">
+            <label for="name">TODO:</label>
+            <input type="text" id="name" name="name" required>
+            <br>
+            <input type="submit" value="Create">
+        </form>
+    {/body}
+{/include}

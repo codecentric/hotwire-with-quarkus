@@ -1,0 +1,13 @@
+<turbo-stream action="remove" target="{todoId}-row">
+
+</turbo-stream>
+
+{#if noTodoLeft}
+    <turbo-stream action="append" target="todolistTable">
+        <template>
+            <tr id="no-todos">
+                <td>No TODOs. Yay!</td>
+            </tr>
+        </template>
+    </turbo-stream>
+{/if}

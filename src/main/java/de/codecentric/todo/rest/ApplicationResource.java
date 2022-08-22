@@ -18,6 +18,7 @@ public class ApplicationResource {
     public static class Templates {
         public static native TemplateInstance todoAppHome();
         public static native TemplateInstance todoAppStreamHome();
+        public static native TemplateInstance todoAppSseHome();
     }
 
     @GET
@@ -29,5 +30,11 @@ public class ApplicationResource {
     @Path("/stream")
     public TemplateInstance renderStreamAppHome() {
         return Templates.todoAppStreamHome();
+    }
+
+    @GET
+    @Path("/sse")
+    public TemplateInstance renderSseAppHome() {
+        return Templates.todoAppSseHome();
     }
 }
