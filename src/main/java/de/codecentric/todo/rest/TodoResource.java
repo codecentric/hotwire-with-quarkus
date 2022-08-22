@@ -27,14 +27,19 @@ public class TodoResource {
 
     private static final Logger LOG = Logger.getLogger(TodoResource.class);
 
+    private final AddTodoUseCase addTodoUseCase;
+    private final MarkTodoCompleteUseCase markTodoCompleteUseCase;
+    private final QueryTodoUseCase queryTodoUseCase;
+    private final RemoveTodoUseCase removeTodoUseCase;
+
     @Inject
-    AddTodoUseCase addTodoUseCase;
-    @Inject
-    MarkTodoCompleteUseCase markTodoCompleteUseCase;
-    @Inject
-    QueryTodoUseCase queryTodoUseCase;
-    @Inject
-    RemoveTodoUseCase removeTodoUseCase;
+    TodoResource(AddTodoUseCase addTodoUseCase, MarkTodoCompleteUseCase markTodoCompleteUseCase,
+                 QueryTodoUseCase queryTodoUseCase, RemoveTodoUseCase removeTodoUseCase) {
+        this.addTodoUseCase = addTodoUseCase;
+        this.markTodoCompleteUseCase = markTodoCompleteUseCase;
+        this.queryTodoUseCase = queryTodoUseCase;
+        this.removeTodoUseCase = removeTodoUseCase;
+    }
 
     @CheckedTemplate
     public static class Templates {
