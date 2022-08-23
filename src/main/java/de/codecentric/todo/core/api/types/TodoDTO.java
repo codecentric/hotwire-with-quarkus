@@ -2,6 +2,12 @@ package de.codecentric.todo.core.api.types;
 
 import java.util.UUID;
 
+/**
+ * DTO to represent the current state of a Todo.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 18 Aug 2022
+ */
 public class TodoDTO {
 
     private final UUID id;

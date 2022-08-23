@@ -21,6 +21,12 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Resource for the samples which use only {@code turbo-frame}s.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 17 Aug 2022
+ */
 @Path("/todos")
 @Produces(MediaType.TEXT_HTML)
 public class TodoResource {
@@ -68,17 +74,17 @@ public class TodoResource {
         return Templates.todos(this.queryTodoUseCase.findAll());
     }
 
-    @GET
-    @Path("/{todoId}")
-    public TemplateInstance getTodo(@PathParam("todoId") final UUID todoId) {
-        return Templates.todoDetail(queryTodoUseCase.findById(todoId));
-    }
-
     @POST
     @Path("/{todoId}")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public TemplateInstance markTodoAsDone(@PathParam("todoId") final UUID todoId) {
         this.markTodoCompleteUseCase.markCompleted(todoId);
         return Templates.todos(this.queryTodoUseCase.findAll());
+    }
+
+    @GET
+    @Path("/{todoId}")
+    public TemplateInstance getTodo(@PathParam("todoId") final UUID todoId) {
+        return Templates.todoDetail(queryTodoUseCase.findById(todoId));
     }
 }

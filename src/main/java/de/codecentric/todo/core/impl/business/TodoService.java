@@ -8,6 +8,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * The implementation of the business logic of a Todo.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 18 Aug 2022
+ */
 @ApplicationScoped
 public class TodoService {
 

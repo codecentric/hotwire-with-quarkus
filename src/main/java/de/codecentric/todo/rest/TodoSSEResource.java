@@ -28,6 +28,12 @@ import javax.ws.rs.sse.SseEventSink;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Resource for the samples with {@code turbo-stream} events via Server-Sent-Events (SSE).
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 22 Aug 2022
+ */
 @Path("/todos/sse")
 @Singleton
 public class TodoSSEResource {

@@ -14,6 +14,12 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * The Facade of the todo component which implements the use cases.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 18 Aug 2022
+ */
 @ApplicationScoped
 public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, QueryTodoUseCase, RemoveTodoUseCase {
 

@@ -3,6 +3,12 @@ package de.codecentric.todo.core.impl.business;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * An entity representing a Todo.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 17 Aug 2022
+ */
 public class Todo {
 
     private final UUID id;

@@ -8,6 +8,13 @@ import java.util.UUID;
 
 import de.codecentric.todo.core.impl.business.Todo;
 
+/**
+ * Adapter implementation for {@link TodoRepository} which holds Todos in-memory ({@link ArrayList}).
+ * It is initialized with three dummy todos.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 18 Aug 2022
+ */
 @ApplicationScoped
 public class InMemoryTodoRepositoryAdapter implements TodoRepository {
 

@@ -21,6 +21,12 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Resource for the samples with {@code turbo-stream} responses based on user interaction.
+ *
+ * @author Felix Riess, codecentric AG
+ * @since 19 Aug 2022
+ */
 @Path("/todos/stream")
 @Produces(MediaType.TEXT_HTML)
 public class TodoStreamResource {
