@@ -4,7 +4,7 @@
             <tr>
                 <th>Title</th>
                 <th>Completed</th>
-                {#if readonly}
+                {#if !readonly}
                     <th>Mark as done</th>
                     <th>Remove</th>
                 {/if}
@@ -21,7 +21,7 @@
                     <tr id="{todo.id}-row">
                         <td>{todo.name}</td>
                         <td>{#if todo.completed} Done {#else} Open {/if}</td>
-                        {#if readonly}
+                        {#if !readonly}
                             <td>
                                 <form action="/secure/todos/{todo.id}" method="POST" enctype="multipart/form-data">
                                     <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
