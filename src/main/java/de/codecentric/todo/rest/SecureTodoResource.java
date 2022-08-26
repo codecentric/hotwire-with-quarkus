@@ -131,7 +131,7 @@ public class SecureTodoResource {
             this.markTodoCompleteUseCase.markCompleted(todoId);
             return Templates.todoListMarkCompleted(this.queryTodoUseCase.findById(todoId));
         } else {
-            LOG.warn("User {} wanted to mark todo {} as completed which is not his own");
+            LOG.warn("User {} wanted to mark todo {} as completed which is not his own", currentLoggedIn, todoId);
             throw new ForbiddenException("You can't mark others todos as completed!");
         }
     }
