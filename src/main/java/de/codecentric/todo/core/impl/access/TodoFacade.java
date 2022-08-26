@@ -1,5 +1,6 @@
 package de.codecentric.todo.core.impl.access;
 
+import de.codecentric.common.validation.ArgumentChecker;
 import de.codecentric.todo.core.api.AddTodoUseCase;
 import de.codecentric.todo.core.api.MarkTodoCompleteUseCase;
 import de.codecentric.todo.core.api.QueryTodoUseCase;
@@ -32,25 +33,19 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
 
     @Override
     public UUID addTodo(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Todo name must not be null or empty");
-        }
+        ArgumentChecker.checkNotEmpty(name, "Todo name");
         return this.todoService.addTodo(name);
     }
 
     @Override
     public void markCompleted(UUID todoId) {
-        if (todoId == null) {
-            throw new IllegalArgumentException("Todo Id must not be null");
-        }
+        ArgumentChecker.checkNotNull(todoId, "Todo Id");
         this.todoService.markCompleted(todoId);
     }
 
     @Override
     public TodoDTO findById(UUID todoId) {
-        if (todoId == null) {
-            throw new IllegalArgumentException("Todo Id must not be null");
-        }
+        ArgumentChecker.checkNotNull(todoId, "Todo Id");
         return mapToDTO(this.todoService.findById(todoId));
     }
 
@@ -61,9 +56,7 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
 
     @Override
     public void removeTodo(UUID todoId) {
-        if (todoId == null) {
-            throw new IllegalArgumentException("Todo Id must not be null");
-        }
+        ArgumentChecker.checkNotNull(todoId, "Todo Id");
         this.todoService.removeTodo(todoId);
     }
 

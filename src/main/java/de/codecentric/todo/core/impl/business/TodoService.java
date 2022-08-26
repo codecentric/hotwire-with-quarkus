@@ -1,5 +1,7 @@
 package de.codecentric.todo.core.impl.business;
 
+import de.codecentric.common.errorhandling.ErrorCode;
+import de.codecentric.common.errorhandling.exception.BusinessException;
 import de.codecentric.todo.core.impl.persistence.TodoRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -38,7 +40,7 @@ public class TodoService {
         if (existing.isPresent()) {
             return existing.get();
         } else {
-            throw new IllegalArgumentException("Todo with id " + todoId + " is not existing");
+            throw new BusinessException(ErrorCode.NOT_FOUND, "Todo with id is not existing", todoId);
         }
     }
 
