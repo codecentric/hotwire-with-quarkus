@@ -1,12 +1,13 @@
 package de.codecentric.todo.core.impl.persistence;
 
+import de.codecentric.todo.core.impl.business.Todo;
+
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import de.codecentric.todo.core.impl.business.Todo;
+import java.util.stream.Collectors;
 
 /**
  * Adapter implementation for {@link TodoRepository} which holds Todos in-memory ({@link ArrayList}).
@@ -29,6 +30,13 @@ public class InMemoryTodoRepositoryAdapter implements TodoRepository {
     @Override
     public List<Todo> findAll() {
         return this.todoList;
+    }
+
+    @Override
+    public List<Todo> findByUserId(UUID userId) {
+        return this.todoList.stream()
+                            .filter(todo -> todo.getUserId() != null && todo.getUserId().equals(userId))
+                            .collect(Collectors.toList());
     }
 
     @Override

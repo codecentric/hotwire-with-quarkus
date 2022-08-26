@@ -22,6 +22,14 @@ public interface TodoRepository {
     List<Todo> findAll();
 
     /**
+     * Find all persisted todos of a specific user.
+     *
+     * @param userId the id of the user.
+     * @return a {@link List} of all todos of the provided user as {@link Todo}.
+     */
+    List<Todo> findByUserId(UUID userId);
+
+    /**
      * Find a todo by its id.
      *
      * @param id the id of the todo.

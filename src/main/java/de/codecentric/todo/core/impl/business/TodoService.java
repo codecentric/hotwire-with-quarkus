@@ -30,6 +30,10 @@ public class TodoService {
         return this.repository.add(new Todo(name));
     }
 
+    public UUID addTodo(String name, UUID userId) {
+        return this.repository.add(new Todo(name, userId));
+    }
+
     public void markCompleted(UUID todoId) {
         Todo existing = findById(todoId);
         existing.markComplete();
@@ -50,5 +54,9 @@ public class TodoService {
 
     public void removeTodo(UUID todoId) {
         this.repository.remove(todoId);
+    }
+
+    public List<Todo> findByUserId(UUID userId) {
+        return this.repository.findByUserId(userId);
     }
 }

@@ -38,6 +38,13 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
     }
 
     @Override
+    public UUID addTodo(String name, UUID userId) {
+        ArgumentChecker.checkNotEmpty(name, "Todo name");
+        ArgumentChecker.checkNotNull(userId, "User Id");
+        return this.todoService.addTodo(name, userId);
+    }
+
+    @Override
     public void markCompleted(UUID todoId) {
         ArgumentChecker.checkNotNull(todoId, "Todo Id");
         this.todoService.markCompleted(todoId);
@@ -52,6 +59,12 @@ public class TodoFacade implements AddTodoUseCase, MarkTodoCompleteUseCase, Quer
     @Override
     public List<TodoDTO> findAll() {
         return this.todoService.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TodoDTO> findByUserId(UUID userId) {
+        ArgumentChecker.checkNotNull(userId, "User Id");
+        return this.todoService.findByUserId(userId).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     @Override

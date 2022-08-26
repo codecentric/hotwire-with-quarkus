@@ -27,4 +27,12 @@ public interface QueryTodoUseCase {
      * @return all existing todos as {@link List} of {@link TodoDTO}.
      */
     List<TodoDTO> findAll();
+
+    /**
+     * Find all todos of a specific user.
+     *
+     * @param userId the user id for which all todos should be returned (not {@code null}).
+     * @return all todos of the user as {@link List} of {@link TodoDTO}.
+     */
+    List<TodoDTO> findByUserId(UUID userId);
 }
