@@ -2,6 +2,7 @@ package de.codecentric.todo.core.impl.business;
 
 import de.codecentric.common.errorhandling.ErrorCode;
 import de.codecentric.common.errorhandling.exception.BusinessException;
+import de.codecentric.common.logging.ILogger;
 import de.codecentric.todo.core.impl.persistence.TodoRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,6 +19,8 @@ import java.util.UUID;
  */
 @ApplicationScoped
 public class TodoService {
+
+    private static final ILogger LOG = ILogger.getLogger(TodoService.class);
 
     private final TodoRepository repository;
 
@@ -44,6 +47,7 @@ public class TodoService {
         if (existing.isPresent()) {
             return existing.get();
         } else {
+            LOG.warn("Todo with id {} is not existing", todoId);
             throw new BusinessException(ErrorCode.NOT_FOUND, "Todo with id is not existing", todoId);
         }
     }

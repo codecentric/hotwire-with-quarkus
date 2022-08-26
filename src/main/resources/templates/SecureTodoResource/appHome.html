@@ -1,0 +1,18 @@
+{#include indexAuthenticated}
+    {#body}
+        <h1>TODO List</h1>
+        <turbo-frame id="todolist" src="/secure/todos?userId={userId}">
+            <div class="loader"></div>
+        </turbo-frame>
+
+        {#if !readonly}
+            <h1>Create TODO</h1>
+            <form action="/secure/todos" method="POST" enctype="multipart/form-data" data-turbo-frame="todolist">
+                <label for="name">TODO:</label>
+                <input type="text" id="name" name="name" required>
+                <br>
+                <input type="submit" value="Create">
+            </form>
+        {/if}
+    {/body}
+{/include}

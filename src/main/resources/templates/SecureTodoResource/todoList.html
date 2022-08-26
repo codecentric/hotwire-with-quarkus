@@ -1,0 +1,41 @@
+<turbo-frame id="todolist">
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Completed</th>
+                {#if readonly}
+                    <th>Mark as done</th>
+                    <th>Remove</th>
+                {/if}
+            </tr>
+        </thead>
+
+        <tbody id="todolistTable">
+        {#if todoList.size == 0}
+            <tr id="no-todos">
+                <td>No TODOs. Yay!</td>
+            </tr>
+            {#else}
+                {#for todo in todoList}
+                    <tr id="{todo.id}-row">
+                        <td>{todo.name}</td>
+                        <td>{#if todo.completed} Done {#else} Open {/if}</td>
+                        {#if readonly}
+                            <td>
+                                <form action="/secure/todos/{todo.id}" method="POST" enctype="multipart/form-data">
+                                    <input type="submit" value="Done" {#if todo.completed} disabled{/if}>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/secure/todos/remove/{todo.id}" method="POST" enctype="multipart/form-data">
+                                    <input type="submit" value="Remove">
+                                </form>
+                            </td>
+                        {/if}
+                    </tr>
+                {/for}
+        {/if}
+        </tbody>
+    </table>
+</turbo-frame>

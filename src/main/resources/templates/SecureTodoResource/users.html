@@ -1,0 +1,14 @@
+{#include indexAuthenticated}
+    {#body}
+        <h1>Users with Todo</h1>
+        {#if users.isEmpty}
+            <p>No users with todos existing</p>
+        {#else}
+            <ul>
+                {#for user in users}
+                    <li><a href="/secure/ui?userId={user}">{user}</a></li>
+                {/for}
+            </ul>
+        {/if}
+    {/body}
+{/include}
