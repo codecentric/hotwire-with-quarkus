@@ -7,6 +7,7 @@ import de.codecentric.todo.core.api.QueryTodoUseCase;
 import de.codecentric.todo.core.api.QueryUsersUseCase;
 import de.codecentric.todo.core.api.RemoveTodoUseCase;
 import de.codecentric.todo.core.api.types.TodoDTO;
+import de.codecentric.todo.rest.types.TodoCreationForm;
 import io.quarkus.oidc.IdToken;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
@@ -64,7 +65,6 @@ public class SecureTodoResource {
     }
 
     @GET
-    @RolesAllowed({"USER"})
     public Response redircet() {
         final String userId = this.idToken.getSubject();
         return Response.seeOther(URI.create("/secure/ui?userId=" + userId)).entity("Redirect").build();
@@ -72,7 +72,6 @@ public class SecureTodoResource {
 
     @GET
     @Path("/ui")
-    @RolesAllowed({"USER"})
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance renderAppHome(@QueryParam("userId") final UUID userId, @Context SecurityContext context) {
         final String currentLoggedIn = this.idToken.getSubject();
@@ -83,7 +82,6 @@ public class SecureTodoResource {
 
     @GET
     @Path("/todos")
-    @RolesAllowed({"USER"})
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance listTodos(@QueryParam("userId") final UUID userId, @Context SecurityContext context) {
         final String currentLoggedIn = this.idToken.getSubject();
@@ -95,7 +93,6 @@ public class SecureTodoResource {
 
     @POST
     @Path("/todos")
-    @RolesAllowed({"USER"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(ApplicationResource.TURBO_STREAM_RESPONSE_TYPE)
     public TemplateInstance addTodo(@MultipartForm final TodoCreationForm todoCreationForm) {
@@ -106,7 +103,6 @@ public class SecureTodoResource {
 
     @POST
     @Path("/todos/remove/{todoId}")
-    @RolesAllowed({"USER"})
     @Produces(ApplicationResource.TURBO_STREAM_RESPONSE_TYPE)
     public TemplateInstance removeTodo(@PathParam("todoId") final UUID todoId) {
         final UUID currentLoggedIn = UUID.fromString(this.idToken.getSubject());
@@ -122,7 +118,6 @@ public class SecureTodoResource {
 
     @POST
     @Path("/todos/{todoId}")
-    @RolesAllowed({"USER"})
     @Produces(ApplicationResource.TURBO_STREAM_RESPONSE_TYPE)
     public TemplateInstance markTodoCompleted(@PathParam("todoId") final UUID todoId) {
         final UUID currentLoggedIn = UUID.fromString(this.idToken.getSubject());
@@ -142,6 +137,14 @@ public class SecureTodoResource {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance getUsersWithTodo(@Context SecurityContext context) {
         return Templates.users(this.queryUsersUseCase.findAll(), isAdmin(context));
+    }
+
+    @GET
+    @Path("/logout")
+    public Response logout() {
+        // this method is only existing because otherwise quarkus thinks "/secure/logout" does not exist.
+        // The "real" config for this endpoint is located in application.properties.
+        return Response.seeOther(URI.create("/")).build();
     }
 
     private boolean isAdmin(SecurityContext securityContext) {

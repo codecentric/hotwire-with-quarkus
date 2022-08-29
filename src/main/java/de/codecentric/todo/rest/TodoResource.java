@@ -5,6 +5,7 @@ import de.codecentric.todo.core.api.MarkTodoCompleteUseCase;
 import de.codecentric.todo.core.api.QueryTodoUseCase;
 import de.codecentric.todo.core.api.RemoveTodoUseCase;
 import de.codecentric.todo.core.api.types.TodoDTO;
+import de.codecentric.todo.rest.types.TodoCreationForm;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import org.jboss.logging.Logger;

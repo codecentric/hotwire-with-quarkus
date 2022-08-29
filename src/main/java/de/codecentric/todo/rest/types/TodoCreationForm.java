@@ -1,4 +1,4 @@
-package de.codecentric.todo.rest;
+package de.codecentric.todo.rest.types;
 
 import org.jboss.resteasy.reactive.PartType;
 import org.jboss.resteasy.reactive.RestForm;
