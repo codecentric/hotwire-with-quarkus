@@ -9,5 +9,5 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
     volumes:
-      - ./config/realm.json:/opt/keycloak/data/import/realm.json
+      - ./config/todo-app-realm.json:/opt/keycloak/data/import/realm.json
     entrypoint: "/opt/keycloak/bin/kc.sh start-dev --import-realm"
