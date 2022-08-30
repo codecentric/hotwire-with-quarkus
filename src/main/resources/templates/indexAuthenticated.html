@@ -14,7 +14,7 @@
     {#let isAdmin?=false}
         {#if isAdmin}<li><a href="/secure/users">Users with Todos</a></li>{/if}
     {/let}
-    <li><a href="/secure/logout">Logout</a></li>
+    <li><a href="/secure/logout" data-turbo="false">Logout</a></li>
 </ul>
 {#insert body}No content{/insert}
 </body>

@@ -6,7 +6,6 @@
         <title>{#insert title}TODO App{/insert}</title>
         <link rel="stylesheet" href="css/todoApp.css">
         <script crossorigin="anonymous" src="https://unpkg.com/@hotwired/turbo@7.1.0/dist/turbo.es2017-umd.js"></script>
-        {#insert additionalScript}{/insert}
     </head>
     <body>
         <h1>TODO App</h1>
@@ -14,7 +13,7 @@
             <li><a href="/">Turbo Frames</a></li>
             <li><a href="/stream">Turbo Frames & Turbo Streams</a></li>
             <li><a href="/sse">Turbo Frames & Turbo Streams with SSE</a></li>
-            <li><a href="/secure">Secure Todo App</a></li>
+            <li><a href="/secure" data-turbo="false">Secure Todo App</a></li>
         </ul>
         {#insert body}No content{/insert}
     </body>
