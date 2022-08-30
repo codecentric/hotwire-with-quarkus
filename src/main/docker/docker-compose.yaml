@@ -3,33 +3,11 @@ services:
   keycloak:
     image: quay.io/keycloak/keycloak:19.0.1
     container_name: keycloak
-    depends_on:
-      - kc-postgres
     ports:
       - "8180:8080"
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      KC_DB: postgresql
-      KC_DB_URL: jdbc:postgresql://kc-postgres:5432/keycloak
-      KC_DB_USERNAME: root
-      KC_DB_PASSWORD: root
     volumes:
       - ./config/realm.json:/opt/keycloak/data/import/realm.json
     entrypoint: "/opt/keycloak/bin/kc.sh start-dev --import-realm"
-
-  kc-postgres:
-    image: postgres:14-alpine
-    container_name: kc-postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - kc-postgres-db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_USER=root
-      - POSTGRES_DB=keycloak
-      - PGDATA=/var/lib/postgresql/data/pgdata
-
-volumes:
-  kc-postgres-db: {}
