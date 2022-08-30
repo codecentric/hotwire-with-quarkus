@@ -65,15 +65,17 @@ public class SecureTodoResource {
     }
 
     @GET
-    public Response redircet() {
-        final String userId = this.idToken.getSubject();
-        return Response.seeOther(URI.create("/secure/ui?userId=" + userId)).entity("Redirect").build();
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance renderAppHome(@Context SecurityContext context) {
+        final String currentLoggedIn = this.idToken.getSubject();
+        final boolean isAdmin = isAdmin(context);
+        return Templates.appHome(false, isAdmin, UUID.fromString(currentLoggedIn));
     }
 
     @GET
     @Path("/ui")
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance renderAppHome(@QueryParam("userId") final UUID userId, @Context SecurityContext context) {
+    public TemplateInstance renderUserTodos(@QueryParam("userId") final UUID userId, @Context SecurityContext context) {
         final String currentLoggedIn = this.idToken.getSubject();
         final boolean isAdmin = isAdmin(context);
         final boolean isReadonly = isReadOnlyAccess(userId, UUID.fromString(currentLoggedIn), isAdmin);
