@@ -4,6 +4,20 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## Starting Keycloak to secure the application
+You can start keycloak via docker: 
+```shell
+docker-compose -f src/main/docker/docker-compose.yaml up -d
+```
+
+Wait until Keycloak is started (check the logs via `docker logs keycloak`)
+
+There are two users available:
+- admin-user (password admin)
+- test-user (password test)
+
+admin-user has ADMIN role, test-user is just a standard USER.
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
