@@ -1,5 +1,8 @@
 # hotwire-with-quarkus
 
+This project contains a sample implementation of a to-do app which uses different components of [Hotwire](https://hotwired.dev/).
+There is also a blog post for this topic available in [English](https://blog.codecentric.de/en/2022/08/hotwire-new-approach-for-modern-web-applications/) and [German](https://blog.codecentric.de/2022/08/hotwire-neuer-ansatz-moderne-webanwendungen/).
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
