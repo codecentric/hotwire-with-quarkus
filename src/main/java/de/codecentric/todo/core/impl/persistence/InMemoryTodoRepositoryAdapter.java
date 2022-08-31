@@ -25,6 +25,8 @@ public class InMemoryTodoRepositoryAdapter implements TodoRepository {
         this.todoList.add(new Todo("Todo"));
         this.todoList.add(new Todo("Another Todo"));
         this.todoList.add(new Todo("Yet another Todo"));
+        this.todoList.add(new Todo("Admin Todo", UUID.fromString("042aa75e-a811-42fe-8223-6c62dc079b5b")));
+        this.todoList.add(new Todo("Standard User Todo", UUID.fromString("f68e5283-481e-4adc-b474-7980849418df")));
     }
 
     @Override
