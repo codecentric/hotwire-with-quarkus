@@ -6,6 +6,17 @@
         <title>{#insert title}TODO App{/insert}</title>
         <link rel="stylesheet" href="css/todoApp.css">
         <script crossorigin="anonymous" src="https://unpkg.com/@hotwired/turbo@7.1.0/dist/turbo.es2017-umd.js"></script>
+        <!--
+        <script type="text/javascript">
+            document.addEventListener("turbo:before-fetch-request", function (e) {
+                if (e.detail.url != null && e.detail.url.pathname.startsWith("/secure")) {
+                    e.preventDefault();
+                    console.log(e);
+                    e.detail.resume();
+                }
+            });
+        </script>
+        -->
     </head>
     <body>
         <h1>TODO App</h1>
