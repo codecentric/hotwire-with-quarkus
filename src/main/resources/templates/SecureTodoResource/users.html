@@ -6,7 +6,7 @@
         {#else}
             <ul>
                 {#for user in users}
-                    <li><a href="/secure/ui?userId={user}">{user}</a></li>
+                    <li><a href="/secure?userId={user}">{user}</a></li>
                 {/for}
             </ul>
         {/if}
